@@ -1,83 +1,95 @@
-# Análise de Padrões Arquiteturais de Software no Projeto `crawl4ai`
+# Identificação de Padrões Arquiteturais — `crawl4ai`
 
-Este repositório contém o material utilizado e produzido para a Atividade 1 da disciplina de Engenharia de Software II (2025.2), focada na identificação de padrões de arquitetura de software no projeto `crawl4ai` utilizando modelos de linguagem da plataforma Hugging Face.
+> Repositório com os artefatos, scripts e instruções para reproduzir a Atividade 1 da disciplina Engenharia de Software II (2025.2): identificação e comparação de padrões arquiteturais no projeto `crawl4ai` usando LLMs e análise manual.
 
-## Equipe
+---
 
-| Nome Completo     | Matrícula | Contribuição                               |
-| ----------------- | --------- | ------------------------------------------ |
-| [Nome do Membro 1]  | [Matrícula] | [Descrição da contribuição]                  |
-| [Nome do Membro 2]  | [Matrícula] | [Descrição da contribuição]                  |
-| [Nome do Membro 3]  | [Matrícula] | [Descrição da contribuição]                  |
-| ...               | ...       | ...                                        |
+## Sumário
+- [Visão Geral](#visão-geral)
+- [Artefatos incluídos](#artefatos-incluídos)
+- [Modelos utilizados (Hugging Face)](#modelos-utilizados-hugging-face)
+- [Metodologia e scripts principais](#metodologia-e-scripts-principais)
+- [Principais achados (resumo)](#principais-achados-resumo)
+- [Limitações e cuidados](#limitações-e-cuidados)
 
-## Projeto Alvo da Análise
+--
 
--   **Nome:** `crawl4ai`
--   **URL do Repositório:** [https://github.com/unclecode/crawl4ai#](https://github.com/unclecode/crawl4ai#)
+## Visão Geral
+Este repositório documenta os procedimentos e contém os artefatos usados para identificar padrões arquiteturais no projeto alvo `crawl4ai`. A análise foi conduzida com três estratégias principais:
+1. **Análise automática de issues** (pipeline que resume e classifica issues do GitHub em temas arquiteturais);
+2. **Análise do código-fonte por modelos de linguagem** (extração de "esqueleto" do código + perguntas factuais ao modelo);
+3. **Análise manual** (leitura crítica do código, README e histórico de commits).
 
-## Atividade 1: Tutorial
+O objetivo é correlacionar as evidências (issues, código, documentação) e produzir um laudo que relacione trechos do código a padrões de arquitetura e padrões de projeto.
 
-### 1. Seleção dos Modelos de Linguagem no Hugging Face
+---
 
-Para esta atividade, selecionamos três modelos de linguagem distintos da plataforma Hugging Face com o objetivo de identificar padrões de arquitetura de software. Nossa estratégia de seleção considerou [descrever a estratégia, por exemplo: a popularidade, especialização em tarefas de NLP, performance em tarefas de classificação de texto, etc.].
+## Artefatos incluídos
+- `docs/Identificações de Padrões Arquiteturais.pdf` — relatório final (PDF) com resultados e justificativas.
+- `scripts/` — scripts Python para extração de AST, agrupamento de issues, chamadas ao modelo e pós-processamento.
+- `notebooks/` — notebooks Jupyter com experimentos exploratórios e visualizações.
+- `artifacts/` — saídas geradas (resumos de issues, resultados JSON por arquivo, prompts utilizados, logs).
+- `requirements.txt` — dependências Python usadas para reproduzir os experimentos.
 
-Os modelos escolhidos foram:
+> Se algum desses diretórios não existir no repositório atual, usar como _template_ para organizar os artefatos.
 
-1.  **[Nome do Modelo 1]** - [Breve justificativa da escolha]
-2.  **[Nome do Modelo 2]** - [Breve justificativa da escolha]
-3.  **[Nome do Modelo 3]** - [Breve justificativa da escolha]
+---
 
-### 2. Identificação dos Padrões Arquiteturais
+## Modelos utilizados (Hugging Face)
+No estudo foram testados e comparados modelos com diferentes perfis (tamanho, foco em código e instrução):
 
-Utilizamos os três modelos selecionados para analisar o código-fonte do projeto `crawl4ai` e identificar a presença de padrões de arquitetura de software.
+- `MiniMaxAI/MiniMax-M2` — modelo pequeno/rápido para análise textual (issues).
+- `Qwen/Qwen2.5-0.5B` — versão leve do Qwen para síntese e saídas estruturadas (JSON).
+- `microsoft/codebert-base` — foco em código, útil para análise estática/trecho de código.
+- `codellama/CodeLlama-7b-hf` — modelo maior aplicado à análise de código e interpretação de padrões.
 
-#### 2.1. Resultados Detalhados por Modelo
+> Links originais e versões estão registrados no PDF de resultados (veja `docs/Identificações de Padrões Arquiteturais.pdf`).
 
-**Modelo 1: [Nome do Modelo 1]**
--   **Padrões Identificados:**
-    -   Padrão A: [Descrição detalhada, trechos de código como evidência, localização no projeto]
-    -   Padrão B: [Descrição detalhada, trechos de código como evidência, localização no projeto]
--   **Resumo da Análise:** [Síntese dos resultados do Modelo 1]
+---
 
-**Modelo 2: [Nome do Modelo 2]**
--   **Padrões Identificados:**
-    -   Padrão C: [Descrição detalhada, trechos de código como evidência, localização no projeto]
-    -   Padrão D: [Descrição detalhada, trechos de código como evidência, localização no projeto]
--   **Resumo da Análise:** [Síntese dos resultados do Modelo 2]
+## Metodologia e scripts principais
+Abaixo estão os passos principais e os scripts propostos para cada etapa. Os scripts são descritos com entrada/saída esperada.
 
-**Modelo 3: [Nome do Modelo 3]**
--   **Padrões Identificados:**
-    -   Padrão E: [Descrição detalhada, trechos de código como evidência, localização no projeto]
-    -   Padrão F: [Descrição detalhada, trechos de código como evidência, localização no projeto]
--   **Resumo da Análise:** [Síntese dos resultados do Modelo 3]
+### 1) Coleta de evidências
+- **Issues do GitHub**: `scripts/analyze_issues.py`
+  - Input: arquivo JSON com issues (`artifacts/issues_raw.json`) ou chamada à API do GitHub.
+  - Output: `artifacts/issues_summary/<tema>.json` com resumos por grupo temático.
+  - Estratégia prática: "dividir para conquistar" — agrupar títulos e metadados, depois resumir por grupo para evitar estouro de memória.
 
-### 3. Comparação dos Resultados
+### 2) Extração do “esqueleto” do código (fatos)
+- **AST extraction**: `scripts/extract_skeleton.py`
+  - Input: árvore de diretórios do projeto alvo.
+  - Output: `artifacts/code_skeleton/<arquivo>.json` com lista de imports, classes, defs e decoradores.
+  - Uso: alimentar prompts factuais (ex.: "FATO 3: Há um singleton?") para reduzir alucinações.
 
-A tabela abaixo compara os padrões de arquitetura identificados por cada um dos três modelos:
+### 3) Pipeline LLM (fatos → interpretação)
+- **Orquestração**: `scripts/llm_pipeline.py`
+  - Passo A: enviar fatos extraídos como perguntas do tipo Sim/Não ao modelo (respostas curtas e previsíveis).
+  - Passo B: usar as respostas do Passo A como contexto para pedir ao modelo que liste padrões confirmados.
+  - Output: `artifacts/code_facts_reports/<arquivo>_patterns.json`.
 
-| Padrão Arquitetural | Modelo 1 | Modelo 2 | Modelo 3 |
-| ------------------- | :------: | :------: | :------: |
-| [Nome do Padrão 1]    |     ✅     |     ❌     |     ✅     |
-| [Nome do Padrão 2]    |     ✅     |     ✅     |     ✅     |
-| [Nome do Padrão 3]    |     ❌     |     ✅     |     ❌     |
-| ...                 |   ...    |   ...    |   ...    |
+### 4) Pós-processamento e consolidação
+- `scripts/postprocess_results.py` — gera tabelas comparativas (CSV/Markdown) e o sumário final.
 
-*(Legenda: ✅ = Identificado, ❌ = Não Identificado)*
+---
 
-### 4. Avaliação da Efetividade dos Modelos
+## Principais achados (resumo)
+> Este resumo sintetiza os resultados que estão detalhados no PDF de apresentação.
 
-Dentre os modelos selecionados, avaliamos que o **[Nome do Modelo Mais Efetivo]** foi o mais eficaz na tarefa de identificação de padrões arquiteturais.
+- **Arquiteturas identificadas:** Microkernel (núcleo + estratégias/plugins), Pipe & Filter (pipeline de processamento de conteúdo), Arquitetura em Camadas (interface → aplicação → domínio → infraestrutura).
+- **Padrões de projeto detectados (exemplos):** Cache (@lru_cache em `model_loader.py`), Factory Method (funções `load_*`), Semaphore (`asyncio.Semaphore` em `async_dispatcher.py`), Decorator (uso parcial em `async_webcrawler.py`), Hook/Plugin (evidências em Issues e módulos `hooks`).
+- **Evidências relevantes:** Issues específicas (#1527, #1572, #1212, etc.), trechos do `async_webcrawler.py` e `model_loader.py` analisados.
 
-**Justificativa:**
+> Para ver as evidências completas consulte o documento `docs/Identificações de Padrões Arquiteturais.pdf` (artefato gerado pelo grupo).
 
-[Explique detalhadamente por que o modelo foi considerado o mais efetivo. Considere aspectos como: precisão dos padrões identificados, quantidade de falsos positivos/negativos, capacidade de generalização, clareza das respostas, etc. Compare com o desempenho dos outros dois modelos para fortalecer sua argumentação.]
+---
 
-### 5. Artefatos e Replicação
+## Limitações e cuidados
+- **Alucinação de modelos**: grandes LLMs podem contradizer suas próprias respostas se não forem guiados por fatos objetivos; por isso a estratégia "Fato → Interpretação" foi adotada.
+- **Viés de amostragem nas issues**: selecionar apenas issues recentes pode mascarar decisões arquiteturais históricas. Agrupar por tema reduz esse viés.
+- **Recursos computacionais**: execuções com CodeLlama-7b exigem GPU e memória; caso contrário, usar modelos menores ou dividir contexto.
 
-Todo o código, scripts e notebooks utilizados para executar a análise e gerar os resultados estão disponíveis neste repositório. Para replicar esta atividade, siga os passos abaixo:
+---
 
-1.  Clone o repositório:
-    ```bash
-    git clone https://github.com/VitorSena0/Engenharia_SoftwareII_2025-2_T02_crawl4ai.git
-    ```
+
+
