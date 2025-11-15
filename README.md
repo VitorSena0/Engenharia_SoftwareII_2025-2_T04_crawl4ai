@@ -9,8 +9,10 @@
 - [Artefatos incluídos](#artefatos-incluídos)
 - [Modelos utilizados (Hugging Face)](#modelos-utilizados-hugging-face)
 - [Metodologia e scripts principais](#metodologia-e-scripts-principais)
-- [Análises Arquiteturais por LLM](#análises-arquiteturais-por-llm)
-  - [Análise Arquitetural com CodeLlama 7B](#análise-arquitetural-com-codellama-7b)
+- [Tutoriais por LLM](#tutoriais-por-llm)
+  - [CodeLlama 7B](#codellama-7b)
+  - [Qwen/Qwen2.5-Coder-7B-Instruct](#qwenqwen25-coder-7b-instruct)
+  - [CodeBERT](#codebert)
   - [Espaço para outras LLMs](#espaço-para-outras-llms)
 - [Principais achados (resumo)](#principais-achados-resumo)
 - [Limitações e cuidados](#limitações-e-cuidados)
@@ -29,12 +31,12 @@ O objetivo é correlacionar as evidências (issues, código, documentação) e p
 ---
 
 ## Artefatos incluídos
-- `tutorial/` —  Scripts reutilizáveis, conter módulos que os notebooks ou apps importam.
-- `tutorial/` — Relatório final (PDF) com resultados e justificativas.
+- `src/` - scripts reutilizáveis (ex.: code_to_mermaid.py).
+- `tutorial/` — Contém o relatório/tutorial do projeto.
 - `docs/` — Documentos e materiais de apoio (PDFs, tutoriais, respostas em MD).
 - `notebooks/` — Notebooks Jupyter com análises, experimentos e provas de conceito.
+- `read.me` — Explicação do projeto
 
-> Se algum desses diretórios não existir no repositório atual, usar como _template_ para organizar os artefatos.
 
 ---
 
@@ -45,8 +47,6 @@ No estudo foram testados e comparados modelos com diferentes perfis (tamanho, fo
 - `Qwen/Qwen2.5-0.5B` — versão leve do Qwen para síntese e saídas estruturadas (JSON).
 - `microsoft/codebert-base` — foco em código, útil para análise estática/trecho de código.
 - `codellama/CodeLlama-7b-hf` — modelo maior aplicado à análise de código e interpretação de padrões.
-
-> Links originais e versões estão registrados no PDF de resultados (veja `docs/Identificações de Padrões Arquiteturais.pdf`).
 
 ---
 
@@ -81,6 +81,8 @@ Abaixo estão os passos principais e os scripts propostos para cada etapa. Os sc
 ### CodeLlama 7B
 
 Esta análise utiliza o notebook `notebooks/codellama-issues-e-pasta-principal.ipynb` para identificar padrões arquiteturais e inspecionar issues do repositório `crawl4ai` usando o modelo **CodeLlama 7B**.
+
+> Tutorial completo: veja [docs/tutorial_codellama.md](docs/tutorial_codellama.md) (quando presente).
 
 #### Infraestrutura Utilizada
 
@@ -132,9 +134,54 @@ O notebook foi projetado para ser totalmente reprodutível:
 
 ---
 
-.
-.adicionar as outras aqui
-.
+### Qwen/Qwen2.5-Coder-7B-Instruct
+
+Este tutorial descreve os passos necessários para executar o notebook `notebooks/Analise_Qwen2-5-Coder-7B-Instruct_prompts1e2.ipynb` no Google Colab ou Kaggle, para análise de padrões arquiteturais.
+
+> Tutorial completo: veja [docs/tutorial_Qwen7B_prompt1e2.md](docs/tutorial_Qwen7B_prompt1e2.md).
+
+Pontos principais:
+
+- **Pré-requisitos:** conta no Hugging Face, token com permissão de *Inference*, conta no Colab ou Kaggle.
+- **Configuração inicial:** primeira célula clona o repositório `crawl4ai`.
+- **Token HF:** configurado como `HF_TOKEN` via *Secrets*:
+  - No Colab, usando `google.colab.userdata`;
+  - No Kaggle, usando `kaggle_secrets.UserSecretsClient`.
+- O notebook oferece duas abordagens:
+  - **3.1 Análise de arquivos chave em lote:** gera `respostasP1.md`;
+  - **3.2 Análise de arquivos individuais (.py):** gera `respostasP2.md`.
+
+---
+
+### CodeBERT
+
+Este guia mostra como rodar o notebook “Clusterizando arquivos Crawl4ai com o Codebert” no Kaggle Notebooks, usando o modelo `microsoft/codebert-base` para gerar embeddings e clusterizar arquivos `.py`.
+
+> Tutorial completo: veja [docs/tutorial_codebert.md](docs/tutorial_codebert.md).
+
+Pontos principais:
+
+- **Ambiente:** Kaggle Notebooks, com `Internet: ON`. CPU é suficiente; GPU opcional.
+- **Instalação de dependências:** `transformers`, `scikit-learn`, e `protobuf==3.20.3` para evitar conflitos.
+- **Repositório alvo:** clonar `https://github.com/unclecode/crawl4ai.git`.
+- **Modelo:** carregamento de `microsoft/codebert-base` diretamente da Hugging Face (sem token).
+- **Pipeline:**
+  - Geração de embeddings para cada arquivo `.py`;
+  - Clusterização com K-Means (ajustável com `n_clusters`);
+  - Inspeção dos clusters e dos “tópicos” por palavras-chave.
+
+---
+
+### Espaço para outras LLMs
+
+Outros colaboradores devem documentar aqui, em seções análogas, as análises/tutoriais de outras LLMs, seguindo o padrão:
+
+- **Nome do modelo e objetivo da análise**;
+- **Notebook(s) ou script(s) principal(is)**;
+- **Infraestrutura utilizada** (Colab, Kaggle, local; GPU/CPU; limitações);
+- **Passo a passo de execução** (instalação, configuração, ordem das células);
+- **Arquivos de saída principais** (JSON, CSV, `.md`, etc.);
+- **Link para o tutorial detalhado em `docs/`**.
 
 ---
 
