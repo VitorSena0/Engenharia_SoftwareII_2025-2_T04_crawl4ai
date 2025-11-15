@@ -126,11 +126,9 @@ O notebook foi projetado para ser totalmente reprodutível:
    - Execute todas as células do notebook **sequencialmente**.
    - O script irá:
      - Carregar o modelo CodeLlama 7B com quantização apropriada;
-     - Analisar os arquivos de código do projeto (`Estratégia 1`);
-     - Analisar as 55 issues embutidas no próprio notebook (`Estratégia 2`);
-     - Gerar os arquivos de resultados, incluindo:
-       - `artifacts/architectural_evidence.json`
-       - e demais relatórios de análise descritos no notebook.
+     - Analisar os arquivos de código do projeto;
+     - Analisar as 55 issues embutidas no próprio notebook;
+     - Gerar os resultados: Relatórios de análise descritos no notebook.
 
 ---
 
