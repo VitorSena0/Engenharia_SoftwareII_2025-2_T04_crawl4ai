@@ -76,9 +76,9 @@ Abaixo estão os passos principais e os scripts propostos para cada etapa. Os sc
 
 ---
 
-## Análises Arquiteturais por LLM
+## Tutoriais por LLM
 
-### Análise Arquitetural com CodeLlama 7B
+### CodeLlama 7B
 
 Esta análise utiliza o notebook `notebooks/codellama-issues-e-pasta-principal.ipynb` para identificar padrões arquiteturais e inspecionar issues do repositório `crawl4ai` usando o modelo **CodeLlama 7B**.
 
