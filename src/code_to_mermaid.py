@@ -2,6 +2,8 @@ import ast
 import os
 import sys
 
+#esse script percorre arquivos .py em um diretório, analisa a AST (estrutura de sintaxe) dos arquivos para extrair classes, métodos e funções de nível de módulo, e gera um diagrama no formato Mermaid (classDiagram) representando as classes, seus métodos, heranças e as funções livres agrupadas.
+
 def parse_file(path):
     with open(path, "r", encoding="utf-8") as f:
         tree = ast.parse(f.read(), filename=path)
