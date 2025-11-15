@@ -172,16 +172,7 @@ Pontos principais:
 
 ---
 
-### Espaço para outras LLMs
-
-Outros colaboradores devem documentar aqui, em seções análogas, as análises/tutoriais de outras LLMs, seguindo o padrão:
-
-- **Nome do modelo e objetivo da análise**;
-- **Notebook(s) ou script(s) principal(is)**;
-- **Infraestrutura utilizada** (Colab, Kaggle, local; GPU/CPU; limitações);
-- **Passo a passo de execução** (instalação, configuração, ordem das células);
-- **Arquivos de saída principais** (JSON, CSV, `.md`, etc.);
-- **Link para o tutorial detalhado em `docs/`**.
+*********************** continuar a mesma ideia para as outras llms ************************
 
 ---
 
