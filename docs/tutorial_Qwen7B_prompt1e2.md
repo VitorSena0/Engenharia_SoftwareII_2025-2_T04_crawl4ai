@@ -11,6 +11,15 @@ Este tutorial descreve os passos necessários para executar o notebook **noteboo
 - Um **Access Token** do Hugging Face com as permissões da seção *Inference*.
   Você pode criar um na seção **Access Tokens** nas configurações do seu perfil do **Hugging Face**.
 - Uma conta no **Google Colab** ou no **Kaggle**.
+- Configurações de ambiente utilizadas:
+  - Colab:
+    - Acelerador de hardware: CPU ou GPUs T4
+    - Tipo de ambiente: Python 3
+    - Versão de ambiente: Mais recente 
+  - Kaggle:
+    - Accelerator: GPUs T4
+    - Internet: ON
+
 
 ---
 
