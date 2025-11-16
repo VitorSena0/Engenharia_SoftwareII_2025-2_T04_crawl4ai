@@ -153,12 +153,12 @@ Pontos principais:
 
 ---
 ### Qwen/Qwen2.5-Coder-0.5B-Instruct
-##Tutorial
-Acesse o notebook: /notebooks/AnaliseQwen2_5_0_5B_limpo.ipynb
-Envie-o para o Google Colab.
-Execute as células na ordem.
+> Tutorial completo: veja [docs/tutorial_Qwen7B_prompt1e2.md](docs/tutorial_Qwen7B_prompt1e2.md).
+- Acesse o notebook: /notebooks/AnaliseQwen2_5_0_5B_limpo.ipynb
+- Envie-o para o Google Colab.
+- Execute as células na ordem.
 
-## notebook automaticamente:
+## Notebook automaticamente:
 - Clona o repositório Crawl4AI
 - Lê README e árvore de diretórios
 - Monta um prompt estruturado
