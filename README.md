@@ -153,12 +153,13 @@ Pontos principais:
 
 ---
 ### Qwen/Qwen2.5-Coder-0.5B-Instruct
-> Tutorial completo: veja [docs/tutorial_Qwen7B_prompt1e2.md](docs/tutorial_Qwen7B_prompt1e2.md).
+> Tutorial completo: veja [docs/Tutorial_Qwen2.5_0.5B.md](docs/Tutorial_Qwen2.5_0.5B.md).
+
 - Acesse o notebook: [notebooks/AnaliseQwen2_5_0_5B_limpo.ipynb](notebooks/AnaliseQwen2_5_0_5B_limpo.ipynb).
 - Envie-o para o Google Colab.
 - Execute as células na ordem.
 
-## Notebook automaticamente:
+**Notebook automaticamente:**
 - Clona o repositório Crawl4AI
 - Lê README e árvore de diretórios
 - Monta um prompt estruturado
@@ -166,7 +167,7 @@ Pontos principais:
 - Identifica padrões arquiteturais
 - Salva arquivos JSON e CSV
 - Nenhuma GPU é necessária.
-
+---
 ### CodeBERT
 
 Este guia mostra como rodar o notebook “Clusterizando arquivos Crawl4ai com o Codebert” no Kaggle Notebooks, usando o modelo `microsoft/codebert-base` para gerar embeddings e clusterizar arquivos `.py`.
