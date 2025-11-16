@@ -152,6 +152,20 @@ Pontos principais:
   - **3.2 Análise de arquivos individuais (.py):** gera `respostasP2.md`.
 
 ---
+### Qwen/Qwen2.5-Coder-0.5B-Instruct
+##Tutorial
+Acesse o notebook: /notebooks/AnaliseQwen2_5_0_5B_limpo.ipynb
+Envie-o para o Google Colab.
+Execute as células na ordem.
+
+##  notebook automaticamente:
+-Clona o repositório Crawl4AI
+-Lê README e árvore de diretórios
+-Monta um prompt estruturado
+-Carrega o modelo Qwen 0.5B
+-Identifica padrões arquiteturais
+-Salva arquivos JSON e CSV
+-Nenhuma GPU é necessária.
 
 ### CodeBERT
 
