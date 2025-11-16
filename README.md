@@ -242,7 +242,7 @@ Acesse o Google Colab:
 https://colab.research.google.com/
 
 **2. Notebook**
-Carregue o arquivo:
+Carregue o arquivo: [notebooks/AnaliseArquiteturaQwen7b.ipynb](notebooks/AnaliseArquiteturaQwen7b.ipynb).
 
 
 **3. Autenticação**
