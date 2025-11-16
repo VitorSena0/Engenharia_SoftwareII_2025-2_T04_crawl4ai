@@ -190,7 +190,6 @@ Este guia mostra como rodar o notebook “Clusterizando arquivos Crawl4ai com o 
         4.  Aplicar K-Means para agrupar os arquivos em 5 clusters.
     * O resultado final será a lista de arquivos de cada cluster, que servirá de entrada para a Fase 2 (CodeLlama).
 
-*********************** continuar a mesma ideia para as outras llms ************************
 
 ---
 
