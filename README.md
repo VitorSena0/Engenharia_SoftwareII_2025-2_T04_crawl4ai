@@ -196,7 +196,7 @@ Este guia mostra como rodar o notebook “Clusterizando arquivos Crawl4ai com o 
 
 Este tutorial descreve os passos necessários para executar o notebook `notebooks/Analise_QWEN2.5-Coder-7B_Crawl4AI.ipynb` no Google Colab, com o objetivo de identificar padrões arquiteturais, camadas e responsabilidades do repositório `crawl4ai`. Toda a análise foi realizada utilizando o modelo **Qwen/Qwen2.5-Coder-7B-Instruct** fornecido via API do Hugging Face, sem necessidade de GPU local.
 
-> Tutorial completo: veja `docs/tutorial_qwen7b.md` (quando presente).
+> Tutorial completo: veja [docs/tutorial_qwen7b.md](docs/tutorial_qwen7b.md)
 
 **Infraestrutura Utilizada**
 
